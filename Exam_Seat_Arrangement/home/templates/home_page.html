@@ -8,8 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple HTML HomePage</title>
-  <link rel="stylesheet" href="{% static 'css/home_style.css'%}">
-  
+  <link rel="stylesheet" href="{% static 'css/home_style.css' %}">
 </head>
 
 <body>
@@ -19,12 +18,20 @@
       <a href="#">Home</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
+
+      {% if user.is_authenticated %}
+      <a href="#">Welcome, {{ user.username }}</a>
+      <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+      <a href="{% url 'login_page' %}">Login</a>
+      {% endif %}
     </nav>
   </header>
+  
   <main>
     <div class="intro">
       <h1>EXAM SEAT ARRANGEMENT</h1>
-      <p>A website For Automated Genration Of The Seating Plans.</p>
+      <p>A website For Automated Generation Of The Seating Plans.</p>
       <button>Learn More</button>
     </div>
     <div class="achievements">
@@ -52,6 +59,7 @@
       <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" alt="me">
     </div>
   </main>
+  
   <footer class="footer">
     <div class="copy">&copy; 2022 Developer</div>
     <div class="bottom-links">

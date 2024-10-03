@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 {% load static %}
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login_Form</title>
   
-  <link rel="stylesheet" href="{% static 'css/stylesheet.css'%}">
+  <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
 </head>
-<body >
+<body>
   <div class="wrapper">
-    <form action="#">
+    <form action="{% url 'login_page' %}" method="post">
+      {% csrf_token %}
       <h2>Login</h2>
-        <div class="input-field">
-        <input type="text" required>
+      
+      <div class="input-field">
+        <input type="text" name="email" required>
         <label>Enter your email</label>
       </div>
+      
       <div class="input-field">
-        <input type="password" required>
+        <input type="password" name="password" required>
         <label>Enter your password</label>
       </div>
+      
       <div class="forget">
         <label for="remember">
           <input type="checkbox" id="remember">
@@ -28,10 +29,13 @@
         </label>
         <a href="#">Forgot password?</a>
       </div>
+      
       <button type="submit">Log In</button>
+      
       <div class="register">
-        <p>Don't have an account? <a href="#">Register</a></p>
+        <p>Don't have an account? <a href="{% url 'sign_up' %}">Register</a></p>
       </div>
+      
     </form>
   </div>
 </body>
