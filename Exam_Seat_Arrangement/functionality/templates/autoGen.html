@@ -9,20 +9,29 @@
 </head>
 <body>
     <h1>Exam Seat Arrangement Generator</h1>
+    
     <div class="form-container">
         <form action="{% url 'autoGen' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="num_classrooms">Total Number of Classrooms:</label>
-            <input type="number" id="num_classrooms" name="num_classrooms" required><br><br>
-            
-            <label for="num_rows">Number of Rows per Classroom:</label>
-            <input type="number" id="num_rows" name="num_rows" required><br><br>
-            
-            <label for="benches_per_row">Total Benches per Row:</label>
-            <input type="number" id="benches_per_row" name="benches_per_row" required><br><br>
+            <div class="form-group">
+                <label for="num_classrooms">Total Number of Classrooms:</label>
+                <input type="number" id="num_classrooms" name="num_classrooms" required>
+            </div>
 
-            <label for="student_list">Upload Student List (PDF):</label>
-            <input type="file" id="student_list" name="student_list" accept=".pdf" required><br><br>
+            <div class="form-group">
+                <label for="num_rows">Number of Rows per Classroom:</label>
+                <input type="number" id="num_rows" name="num_rows" required>
+            </div>
+
+            <div class="form-group">
+                <label for="benches_per_row">Total Benches per Row:</label>
+                <input type="number" id="benches_per_row" name="benches_per_row" required>
+            </div>
+
+            <div class="form-group">
+                <label for="student_list">Upload Student List (PDF, Multiple):</label>
+                <input type="file" id="student_list" name="student_list" accept=".pdf" multiple required>
+            </div>
             
             <button type="submit">Generate Seat Arrangement</button>
         </form>
@@ -34,15 +43,17 @@
         {% for classroom, seats in seating_plan.items %}
         <div class="classroom">
             <h3>Classroom {{ classroom }}</h3>
-            <table>
+            <div class="grid-container">
                 {% for row in seats %}
-                <tr>
-                    {% for seat in row %}
-                    <td>{{ seat }}</td>
-                    {% endfor %}
-                </tr>
+                    <div class="row">
+                        {% for seat in row %}
+                        <div class="seat">
+                            <span>{{ seat }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
                 {% endfor %}
-            </table>
+            </div>
         </div>
         {% endfor %}
         <button onclick="window.print()">Print Seating Plan</button>
