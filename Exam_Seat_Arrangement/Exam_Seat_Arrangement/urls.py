@@ -26,6 +26,7 @@ urlpatterns = [
     path("login_page/", login_view, name="login_page"),
     path("Register_page/", sign_up, name="sign_up"),
     path("autoGen/", autoGen, name="autoGen"),
-    path('logout/', logout_view, name='logout')
+    path('logout/', logout_view, name='logout'),
+   # path('seating_display/', seating_display, name='seating_display')
 
 ]

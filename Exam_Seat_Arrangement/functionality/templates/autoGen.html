@@ -4,60 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seat Arrangement Generator</title>
+    <title>Exam Seat Arrangement Generator</title>
     <link rel="stylesheet" href="{% static 'css/seating_style.css' %}">
 </head>
 <body>
     <h1>Exam Seat Arrangement Generator</h1>
     
     <div class="form-container">
-        <form action="{% url 'autoGen' %}" method="post" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'autoGen' %}">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="num_classrooms">Total Number of Classrooms:</label>
-                <input type="number" id="num_classrooms" name="num_classrooms" required>
-            </div>
-
-            <div class="form-group">
-                <label for="num_rows">Number of Rows per Classroom:</label>
-                <input type="number" id="num_rows" name="num_rows" required>
-            </div>
-
-            <div class="form-group">
-                <label for="benches_per_row">Total Benches per Row:</label>
-                <input type="number" id="benches_per_row" name="benches_per_row" required>
-            </div>
-
-            <div class="form-group">
-                <label for="student_list">Upload Student List (PDF, Multiple):</label>
-                <input type="file" id="student_list" name="student_list" accept=".pdf" multiple required>
-            </div>
-            
-            <button type="submit">Generate Seat Arrangement</button>
+        
+            <label for="num_classrooms">Number of Classrooms:</label>
+            <input type="number" name="num_classrooms" id="num_classrooms" required><br>
+        
+            <label for="num_columns">Number of Columns per Classroom:</label>
+            <input type="number" name="num_columns" id="num_columns" required><br>
+        
+            <label for="benches_per_column">Benches per Column:</label>
+            <input type="number" name="benches_per_column" id="benches_per_column" required><br>
+        
+            <label for="student_list">Upload Student List (PDF):</label>
+            <input type="file" name="student_list" id="student_list" multiple required><br>
+        
+            <button type="submit">Generate Seating Plan</button>
+        
+            {% if error_message %}
+                <p style="color:red">{{ error_message }}</p>
+            {% endif %}
         </form>
-    </div>
-
-    <div class="seating-plan">
+        
+        <!-- Render seating plan if available -->
         {% if seating_plan %}
-        <h2>Generated Seating Plan</h2>
-        {% for classroom, seats in seating_plan.items %}
-        <div class="classroom">
-            <h3>Classroom {{ classroom }}</h3>
-            <div class="grid-container">
-                {% for row in seats %}
-                    <div class="row">
-                        {% for seat in row %}
-                        <div class="seat">
-                            <span>{{ seat }}</span>
-                        </div>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
-        <button onclick="window.print()">Print Seating Plan</button>
+            <h2>Seating Plan</h2>
+            {% for classroom, seats in seating_plan.items %}
+                <h3>Classroom {{ classroom }}</h3>
+                <table border="1">
+                    {% for column in seats %}
+                        <tr>
+                            {% for bench in column %}
+                                <td>{{ bench }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
         {% endif %}
+            
+        </form>
     </div>
 </body>
 </html>

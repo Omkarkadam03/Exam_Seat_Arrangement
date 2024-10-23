@@ -68,7 +68,7 @@ button:hover {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adapt based on screen size */
     gap: 10px;
 }
 
