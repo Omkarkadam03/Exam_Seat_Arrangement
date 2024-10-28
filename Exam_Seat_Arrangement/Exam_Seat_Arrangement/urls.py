@@ -27,6 +27,7 @@ urlpatterns = [
     path("Register_page/", sign_up, name="sign_up"),
     path("autoGen/", autoGen, name="autoGen"),
     path('logout/', logout_view, name='logout'),
+    #path('generate_pdf/', generate_pdf, name='generate_pdf'),  # New route for PDF generation
    # path('seating_display/', seating_display, name='seating_display')
 
 ]

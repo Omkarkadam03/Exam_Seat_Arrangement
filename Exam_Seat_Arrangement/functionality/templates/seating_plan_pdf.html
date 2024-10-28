@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seating Plan PDF</title>
+    <style>
+        /* Styling for the PDF */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .classroom {
+            margin-bottom: 20px;
+        }
+        h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+        /* Add page breaks after each classroom for the PDF */
+        .classroom {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+    <h2>Seating Plan</h2>
+    {% for classroom, seats in seating_plan.items %}
+        <div class="classroom">
+            <h3>Classroom {{ classroom }}</h3>
+            <table>
+                {% for row in seats %}
+                    <tr>
+                        {% for seat in row %}
+                            <td>{{ seat }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endfor %}
+</body>
+</html>

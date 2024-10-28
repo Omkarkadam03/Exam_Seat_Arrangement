@@ -10,6 +10,7 @@
 <body>
     <h1>Exam Seat Arrangement Generator</h1>
     
+    <!-- Input Form Section -->
     <div class="form-container">
         <form method="POST" enctype="multipart/form-data" action="{% url 'autoGen' %}">
             {% csrf_token %}
@@ -32,25 +33,40 @@
                 <p style="color:red">{{ error_message }}</p>
             {% endif %}
         </form>
-        
-        <!-- Render seating plan if available -->
-        {% if seating_plan %}
-            <h2>Seating Plan</h2>
-            {% for classroom, seats in seating_plan.items %}
+    </div>
+
+    <!-- Seating Plan Section, only visible after submission -->
+    {% if seating_plan %}
+    <div class="seating-plan-container" id="seating-plan">
+        <h2>Generated Seating Plan</h2>
+        {% for classroom, seats in seating_plan.items %}
+            <div class="classroom-wrapper">
                 <h3>Classroom {{ classroom }}</h3>
                 <table border="1">
-                    {% for column in seats %}
+                    {% for row in seats %}
                         <tr>
-                            {% for bench in column %}
-                                <td>{{ bench }}</td>
+                            {% for seat in row %}
+                                <td>{{ seat }}</td>
                             {% endfor %}
                         </tr>
                     {% endfor %}
                 </table>
-            {% endfor %}
-        {% endif %}
-            
-        </form>
+            </div>
+        {% endfor %}
+        <!-- Button to print only the seating plan -->
+        <button onclick="printSeatingPlan()">Print Seating Plan</button>
     </div>
+    {% endif %}
+
+    <script>
+        function printSeatingPlan() {
+            const printContent = document.getElementById("seating-plan").innerHTML;
+            const originalContent = document.body.innerHTML;
+
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+        }
+    </script>
 </body>
 </html>
