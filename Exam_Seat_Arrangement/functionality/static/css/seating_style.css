@@ -1,8 +1,24 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: darkgray;
     margin: 0;
     padding: 0;
+}
+
+.navbar {
+    background-color: lightgray;
+    padding: 25px;
+    text-align: right;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #000;
+    padding: 35px 20px;
+}
+
+.nav-item:hover {
+    color: #302f49;
 }
 
 h1 {
@@ -12,12 +28,13 @@ h1 {
 }
 
 .form-container {
-    background: #fff;
+    background: lightgray;
     padding: 20px;
     max-width: 600px;
     margin: 20px auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    border: 1px solid black;
 }
 
 label {
@@ -28,7 +45,7 @@ label {
 }
 
 input {
-    width: 100%;
+    width: 96%;
     padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 5px;
@@ -37,7 +54,7 @@ input {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: darkslategray;
     color: white;
     border: none;
     border-radius: 5px;
@@ -46,33 +63,41 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    color: #000000;
+    border-color: #000000;
+    background: rgba(47, 79, 79, 0.445);
 }
 
 .seating-plan-container {
-    background: #fff;
+    background: lightgray;
     padding: 20px;
     max-width: 900px;
     margin: 30px auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
+    border: 1px solid black;
 }
 
-.seating-plan-container h2 {
-    text-align: center;
-    margin-top: 0;
-    color: #333;
+/* Style for individual classroom containers */
+.classroom-container {
+    background-color: darkgray;
+    border: 1px solid black;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
+    border-collapse: inherit;
+    margin: 30px 0;
+    background-color: lightgray;
 }
 
 table, th, td {
-    border: 1px solid #ced4da;
+    border: 2px solid #000000;
 }
 
 td {
@@ -80,15 +105,21 @@ td {
     text-align: center;
 }
 
-/* Print styling */
 @media print {
-    /* Hide form and buttons in print view */
-    .form-container, button {
+    .navbar, .form-container, button {
         display: none;
     }
 
-    /* Ensure each classroom starts on a new page in print */
-    .classroom-wrapper {
+    .classroom-container {
         page-break-after: always;
     }
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #302f49;
+    padding: 40px 80px;
+    color: #fff;
 }

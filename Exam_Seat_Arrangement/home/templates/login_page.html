@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
 </head>
 <body>
+  <div class="nav-bar">
+    <a href="{% url 'home_page' %}" class="nav-link">Home</a>
+    <a href="{% url 'contact_page' %}" class="nav-link">Contact</a>
+  </div>
   <div class="wrapper">
     <form action="{% url 'login_page' %}" method="post">
       {% csrf_token %}
@@ -24,11 +28,11 @@
       
       <div class="forget">
         <label for="remember">
-          <input type="checkbox" id="remember">
-          <p>Remember me</p>
+            <input type="checkbox" id="remember" name="remember">
+            <p>Remember me</p>
         </label>
-        <a href="#">Forgot password?</a>
-      </div>
+        <a href="{% url 'password_reset' %}">Forgot password?</a>
+    </div>
       
       <button type="submit">Log In</button>
       

@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="{% static 'css/stylesheet.css'%}">
 </head>
 <body>
+  <div class="nav-bar">
+    <a href="{% url 'home_page' %}" class="nav-link">Home</a>
+    <a href="{% url 'contact_page' %}" class="nav-link">Contact</a>
+  </div>
   <div class="wrapper">
     <form action="{% url 'sign_up' %}" method="post">
       {% csrf_token %}

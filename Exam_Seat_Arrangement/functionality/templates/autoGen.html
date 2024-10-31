@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="{% static 'css/seating_style.css' %}">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <a href="{% url 'home_page' %}" class="nav-item">Home</a>
+        <a href="{% url 'contact_page' %}" class="nav-item">Contact</a>
+        {% if user.is_authenticated %}
+            <span class="nav-item">Welcome, {{ user.username }}!</span>
+            <a href="{% url 'logout' %}" class="nav-item">Logout</a>
+        {% else %}
+            <a href="{% url 'login_page' %}" class="nav-item">Login</a>
+        {% endif %}
+    </header>
+    
     <h1>Exam Seat Arrangement Generator</h1>
     
     <!-- Input Form Section -->
@@ -16,16 +28,16 @@
             {% csrf_token %}
         
             <label for="num_classrooms">Number of Classrooms:</label>
-            <input type="number" name="num_classrooms" id="num_classrooms" required><br>
+            <input type="number" name="num_classrooms" id="num_classrooms" required><br><br>
         
             <label for="num_columns">Number of Columns per Classroom:</label>
-            <input type="number" name="num_columns" id="num_columns" required><br>
+            <input type="number" name="num_columns" id="num_columns" required><br><br>
         
             <label for="benches_per_column">Benches per Column:</label>
-            <input type="number" name="benches_per_column" id="benches_per_column" required><br>
+            <input type="number" name="benches_per_column" id="benches_per_column" required><br><br>
         
             <label for="student_list">Upload Student List (PDF):</label>
-            <input type="file" name="student_list" id="student_list" multiple required><br>
+            <input type="file" name="student_list" id="student_list" multiple required><br><br>
         
             <button type="submit">Generate Seating Plan</button>
         
@@ -35,12 +47,12 @@
         </form>
     </div>
 
-    <!-- Seating Plan Section, only visible after submission -->
+    <!-- Seating Plan Section, with each classroom in its own container -->
     {% if seating_plan %}
     <div class="seating-plan-container" id="seating-plan">
         <h2>Generated Seating Plan</h2>
         {% for classroom, seats in seating_plan.items %}
-            <div class="classroom-wrapper">
+            <div class="classroom-container">
                 <h3>Classroom {{ classroom }}</h3>
                 <table border="1">
                     {% for row in seats %}
@@ -68,5 +80,16 @@
             document.body.innerHTML = originalContent;
         }
     </script>
+    <br><br><br>
+    <footer class="footer">
+        <div class="copy">&copy; BY STUDENTS OF THIRD YEAR COMPUTER TECHNOLOGY<br>
+          <ul>
+            <li>OMKAR RAMESHKUMAR KADAM</li>
+            <li>PARTH RAJENDRA SHETE</li>
+            <li>SIDDHESH BAJIRAO YADAV</li>
+            <li>PRATIK RAMHARI MANE</li>
+          </ul> 
+        </div>
+      </footer>
 </body>
 </html>

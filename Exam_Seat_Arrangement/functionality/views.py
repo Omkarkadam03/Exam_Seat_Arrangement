@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from PyPDF2 import PdfReader
 import re
+from home.views import logout_view, sign_up
 
 def autoGen(request):
     seating_plan = None

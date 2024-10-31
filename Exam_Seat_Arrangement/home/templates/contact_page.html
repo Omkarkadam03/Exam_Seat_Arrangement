@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Automated Exam Seat Arrangement</title>
+  <link rel="stylesheet" href="{% static 'css/contact_style.css' %}">
+</head>
+
+<body>
+  <header class="header">
+    <a href="#" class="logo">BY_GROUP_10</a>
+    <nav class="nav-items">
+      <a href="{% url 'home_page' %}">Home</a>
+      <a href="{% url 'contact_page' %}">Contact</a>
+
+      {% if user.is_authenticated %}
+      <a href="#">Welcome, {{ user.username }}</a>
+      <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+      <a href="{% url 'login_page' %}">Login</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    <div class="contact-container">
+      <h1>Contact Us</h1>
+      <p>If you have any questions, suggestions, or need assistance, feel free to reach out to us using the form below or through our contact details.</p>
+      
+      <!-- Contact Form -->
+      <form class="contact-form" method="POST" action="{% url 'contact_page' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="submit-button">Send Message</button>
+      </form>
+
+      <!-- Contact Information Section -->
+      <div class="contact-info">
+        <h2>Our Contact Information</h2>
+        <p>Email: support@examseatarrangement.com</p>
+        <p>Phone: +123-456-7890</p>
+        <p>Address: 123 Exam Lane, College Town, State, Country</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="copy">&copy; BY STUDENTS OF THIRD YEAR COMPUTER TECHNOLOGY<br>
+      <ul>
+        <li>OMKAR RAMESHKUMAR KADAM</li>
+        <li>PARTH RAJENDRA SHETE</li>
+        <li>SIDDHESH BAJIRAO YADAV</li>
+        <li>PRATIK RAMHARI MANE</li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

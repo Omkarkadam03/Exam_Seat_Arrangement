@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from home.views import *
 from functionality.views import *
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -27,7 +28,11 @@ urlpatterns = [
     path("Register_page/", sign_up, name="sign_up"),
     path("autoGen/", autoGen, name="autoGen"),
     path('logout/', logout_view, name='logout'),
-    #path('generate_pdf/', generate_pdf, name='generate_pdf'),  # New route for PDF generation
-   # path('seating_display/', seating_display, name='seating_display')
+    path('contact/', contact_page, name='contact_page'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset_form.html'), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
+    
 
 ]

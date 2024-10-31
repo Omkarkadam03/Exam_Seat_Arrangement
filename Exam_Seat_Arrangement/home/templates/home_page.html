@@ -15,9 +15,8 @@
   <header class="header">
     <a href="#" class="logo">BY_GROUP_10</a>
     <nav class="nav-items">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <a href="{% url 'home_page' %}">Home</a>
+      <a href="{% url 'contact_page' %}">Contact</a>
 
       {% if user.is_authenticated %}
       <a href="#">Welcome, {{ user.username }}</a>
@@ -37,13 +36,46 @@
     <div class="about-me">
       <div class="about-me-text">
         <h2>Learn More & Get Started</h2>
-        <p>Here, This website is developed to provide an ease to the colleges and institutes and specially providing relief to staff by freeing them with manual work of seat arrangements of students while exam time.
-          <br><br>We help you with generation of exam sheets automatically by using just a simple website interface, you just have to enter the neccessary input data(like classroom details and list of students in the pdf format)
-          and leave the rest to us.
+        <p>This website is developed to provide an ease to colleges and institutes by automating the process of seat arrangement for exams, saving significant time and effort for staff.
+          <br><br>We simplify the creation of seating arrangements. Just input the required data, like classroom details and a PDF list of students, and the system takes care of the rest.
+          <br><br>Try Now By Generating your own automated seating arrangements click the botton and the work is done
         </p>
+        <!-- Conditional Try Now Button -->
+        {% if user.is_authenticated %}
+          <a href="{% url 'autoGen' %}" class="try-now-button">
+            Try Now <span class="arrow">→</span>
+          </a>
+        {% else %}
+          <a href="{% url 'login_page' %}" class="try-now-button">
+            Try Now <span class="arrow">→</span>
+          </a>
+        {% endif %}
       </div>
-      <img src="/static/images/gettyimages-1437824169-612x612.jpg"                                                                                                                                                                                                         >
+      <img src="/static/images/gettyimages-1437824169-612x612.jpg">
     </div>
+
+    <!-- Features Section and other content below -->
+    <section class="features">
+      <h2>Features of Our System</h2>
+      <div class="feature-list">
+        <div class="feature-card">
+          <h3>Automated Seat Allocation</h3>
+          <p>Efficiently assigns students to seats across classrooms based on your input, eliminating manual seat arrangement tasks.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Flexible Classroom Configurations</h3>
+          <p>Supports various classroom layouts by allowing customization of columns, rows, and benches per row for each room.</p>
+        </div>
+        <div class="feature-card">
+          <h3>PDF Export</h3>
+          <p>Generate and download a PDF of seating arrangements, organized for easy printing, with each classroom on a separate page.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Secure & Easy Access</h3>
+          <p>Our platform offers a user-friendly, secure environment for managing seat arrangements with access control through user login.</p>
+        </div>
+      </div>
+    </section>
   </main>
   
   <footer class="footer">
@@ -54,23 +86,7 @@
         <li>SIDDHESH BAJIRAO YADAV</li>
         <li>PRATIK RAMHARI MANE</li>
       </ul> 
-  </div>
-    <!--..<div class="bottom-links">
-      <div class="links">
-        <span>More Info</span>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </div>
-      <div class="links">
-        <span>Social Links</span>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-      </div>
     </div>
-    --> 
   </footer>
 </body>
-
 </html>
